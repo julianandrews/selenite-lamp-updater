@@ -7,8 +7,8 @@ pub fn load(file: &std::path::Path) -> Result<Config> {
         config.modes.iter().map(|mode| mode.name.as_str()).collect();
     let default_modes = std::iter::once(config.default_mode.as_str());
     let timer_modes = config.timers.iter().map(|timer| timer.mode.as_str());
-    let email_modes = config.email_files.iter().map(|timer| timer.mode.as_str());
-    for mode in default_modes.chain(timer_modes).chain(email_modes) {
+    let count_modes = config.count_files.iter().map(|timer| timer.mode.as_str());
+    for mode in default_modes.chain(timer_modes).chain(count_modes) {
         if !defined_modes.contains(mode) {
             return Err(anyhow::anyhow!(format!("Mode {} not defined.", mode,)));
         }
@@ -23,7 +23,7 @@ pub struct Config {
     pub default_mode: String,
     pub modes: Vec<LampMode>,
     pub timers: Vec<TimerConfig>,
-    pub email_files: Vec<EmailConfig>,
+    pub count_files: Vec<CountFileConfig>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -43,7 +43,7 @@ pub struct TimerConfig {
 
 #[derive(Debug, Clone, serde::Deserialize)]
 #[serde(rename_all = "kebab-case", deny_unknown_fields)]
-pub struct EmailConfig {
+pub struct CountFileConfig {
     pub mode: String,
     pub file: std::path::PathBuf,
 }

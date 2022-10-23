@@ -1,5 +1,5 @@
 mod config;
-mod email_watcher;
+mod count_watcher;
 mod lamp_controller;
 mod timer;
 
@@ -8,7 +8,7 @@ use std::sync::{Arc, Mutex};
 use anyhow::{Context, Result};
 use clap::{AppSettings, Parser};
 
-use email_watcher::EmailFileWatcher;
+use count_watcher::CountWatcher;
 use lamp_controller::LampController;
 use timer::Timer;
 
@@ -41,16 +41,16 @@ async fn main() -> Result<()> {
         .collect();
     let timer_futures = futures::future::join_all(timer_futures);
 
-    let email_watcher = EmailFileWatcher::new(config.email_files.clone());
-    let email_watcher_future = email_watcher.run(controller.clone());
+    let count_watcher = CountWatcher::new(config.count_files.clone());
+    let count_watcher_future = count_watcher.run(controller.clone());
 
-    let (timer_results, email_watcher_result) =
-        futures::future::join(timer_futures, email_watcher_future).await;
+    let (timer_results, count_watcher_result) =
+        futures::future::join(timer_futures, count_watcher_future).await;
 
     for result in timer_results {
         result?;
     }
-    email_watcher_result?;
+    count_watcher_result?;
 
     Ok(())
 }

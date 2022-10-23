@@ -7,18 +7,18 @@ use std::sync::{Arc, Mutex};
 use anyhow::Result;
 use notify::{RecommendedWatcher, Watcher};
 
-use crate::config::EmailConfig;
+use crate::config::CountFileConfig;
 use crate::lamp_controller::LampController;
 
 type NotifyResult = notify::Result<notify::Event>;
 
 #[derive(Debug, Clone)]
-pub struct EmailFileWatcher {
+pub struct CountWatcher {
     modes: BTreeMap<PathBuf, String>,
 }
 
-impl EmailFileWatcher {
-    pub fn new(configs: Vec<EmailConfig>) -> Self {
+impl CountWatcher {
+    pub fn new(configs: Vec<CountFileConfig>) -> Self {
         let mut modes = BTreeMap::new();
         for config in configs {
             modes.insert(config.file, config.mode);
