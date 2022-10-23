@@ -38,7 +38,7 @@ pub struct LampMode {
 pub struct TimerConfig {
     pub mode: String,
     pub schedule: ScheduleConfig,
-    pub duration: u64,
+    pub duration: i64,
 }
 
 #[derive(Debug, Clone, serde::Deserialize)]

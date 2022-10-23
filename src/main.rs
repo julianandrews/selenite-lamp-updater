@@ -25,11 +25,9 @@ async fn main() -> Result<()> {
         }
     };
     let controller = Arc::new(Mutex::new(LampController::new(file, &config.modes)));
-    controller
-        .lock()
-        .expect("Failed to unlock mutex")
-        .enable(&config.default_mode)?;
+    controller.lock().unwrap().enable(&config.default_mode)?;
 
+    // TODO: print a message when futures complete, and maybe refactor this mess.
     let timers: Vec<_> = config
         .timers
         .into_iter()

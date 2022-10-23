@@ -102,11 +102,10 @@ impl CountWatcher {
             .modes
             .get(path)
             .ok_or_else(|| anyhow::anyhow!("Failed to get mode for {:?}", path))?;
-        let mut lamp_controller = lamp_controller.lock().expect("Failed to unlock mutex");
         if count > 0 {
-            lamp_controller.enable(mode)
+            lamp_controller.lock().unwrap().enable(mode)
         } else {
-            lamp_controller.disable(mode)
+            lamp_controller.lock().unwrap().disable(mode)
         }
     }
 }
