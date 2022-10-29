@@ -2,8 +2,10 @@
 name = "selenite-lamp-updater"
 version = "0.1.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+authors = ["Julian Andrews <jandrews271@gmail.com>"]
+license = "BSD-3-Clause"
+repository = "https://github.com/julianandrews/selenite-lamp-updater"
+description = "Dynamic DNS client"
 
 [dependencies]
 anyhow = "1.0.66"
@@ -12,7 +14,7 @@ notify = "5.0.0"
 serde = { version = "1.0.146", features = ["derive"] }
 serde_json = "1.0.87"
 tokio = { version = "1.21.2", features = ["full"] }
-selenite-lamp = { git = "https://github.com/julianandrews/selenite-lamp" }
+selenite-lamp = { git = "https://github.com/julianandrews/selenite-lamp", tag = "v0.2.2"}
 toml = "0.5.9"
 cron = "0.12.0"
 chrono = "0.4.22"

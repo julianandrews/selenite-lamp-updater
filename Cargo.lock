@@ -791,7 +791,7 @@ checksum = "9c8132065adcfd6e02db789d9285a0deb2f3fcb04002865ab67d5fb103533898"
 [[package]]
 name = "selenite-lamp"
 version = "0.2.2"
-source = "git+https://github.com/julianandrews/selenite-lamp#b5bc99d014d8cc2272f319b599535d3551a5d1ed"
+source = "git+https://github.com/julianandrews/selenite-lamp?tag=v0.2.2#b5bc99d014d8cc2272f319b599535d3551a5d1ed"
 dependencies = [
  "anyhow",
  "bincode",
