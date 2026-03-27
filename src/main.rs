@@ -28,11 +28,7 @@ async fn main() -> Result<()> {
     controller.lock().unwrap().enable(&config.default_mode)?;
 
     // TODO: print a message when futures complete, and maybe refactor this mess.
-    let timers: Vec<_> = config
-        .timers
-        .into_iter()
-        .map(|timer| Timer::new(timer))
-        .collect();
+    let timers: Vec<_> = config.timers.into_iter().map(Timer::new).collect();
     let timer_futures: Vec<_> = timers
         .iter()
         .map(|timer| timer.run(controller.clone()))

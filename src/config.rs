@@ -55,7 +55,7 @@ impl std::str::FromStr for ScheduleConfig {
     type Err = cron::error::Error;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let schedule = std::str::FromStr::from_str(&s)?;
+        let schedule = std::str::FromStr::from_str(s)?;
         Ok(Self(schedule))
     }
 }
